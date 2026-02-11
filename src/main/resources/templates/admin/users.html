@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<a th:href="@{/admin/home}">Back to Admin Page</a>
+
+<h1>Users</h1>
+
+<table>
+    <tr>
+        <th>PICTURE</th>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>SURNAME</th>
+        <th>USERNAME</th>
+    </tr>
+    <tr>
+    <tr th:each="user : ${users}">
+        <td>
+            <img th:if="${user.pictureName != null && !user.pictureName.isEmpty()}"
+                 th:src="@{/image/get(picName=${user.pictureName})}" width="50">
+            <img th:if="${user.pictureName == null || user.pictureName.isEmpty()}"
+                 th:src="@{/images/img.png}" width="50">
+        </td>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.username}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Categories</h1>
+    <div class="nav-menu">
+        <a th:href="@{/admin/home}">Back to Admin Page</a>
+        <a th:href="@{/categories/add}">[+] Add Category</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.id}"></td>
+            <td th:text="${category.name}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/categories/update(id=${category.id})}">UPDATE</a>
+                <a th:href="@{/categories/delete(id=${category.id})}">DELETE</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw3288\paperh2211\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 -- online_store.category definition\
+\
+CREATE TABLE `category` (\
+  `id` int NOT NULL AUTO_INCREMENT,\
+  `name` varchar(100) NOT NULL,\
+  PRIMARY KEY (`id`),\
+  UNIQUE KEY `category_unique` (`name`)\
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\
+\
+\
+-- online_store.users definition\
+\
+CREATE TABLE `users` (\
+  `id` int NOT NULL AUTO_INCREMENT,\
+  `name` varchar(100) NOT NULL,\
+  `surname` varchar(100) NOT NULL,\
+  `username` varchar(100) NOT NULL,\
+  `password` varchar(100) NOT NULL,\
+  `user_type` enum('ADMIN','USER') NOT NULL DEFAULT 'USER',\
+  `picture_name` varchar(100) DEFAULT NULL,\
+  PRIMARY KEY (`id`),\
+  UNIQUE KEY `user_unique` (`username`)\
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\
+\
+\
+-- online_store.product definition\
+\
+CREATE TABLE `product` (\
+  `id` int NOT NULL AUTO_INCREMENT,\
+  `title` varchar(100) NOT NULL,\
+  `price` decimal(10,2) NOT NULL,\
+  `description` varchar(255) NOT NULL,\
+  `created_at` datetime NOT NULL,\
+  `category_id` int NOT NULL,\
+  `user_id` int NOT NULL,\
+  PRIMARY KEY (`id`),\
+  KEY `product_category_FK` (`category_id`),\
+  KEY `product_users_FK` (`user_id`),\
+  CONSTRAINT `product_category_FK` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),\
+  CONSTRAINT `product_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)\
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;}

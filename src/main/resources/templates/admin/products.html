@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Products</h1>
+
+    <div class="nav-menu">
+        <a th:href="@{/admin/home}">Back to Admin Page</a>
+        <a th:href="@{/products/add}">Add Product</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>User</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.title}"></td>
+            <td th:text="'$' + ${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.category != null ? product.category.name : 'N/A'}"></td>
+            <td th:text="${product.user != null ? product.user.username : 'N/A'}"></td>
+            <td th:text="${product.createdAt}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/products/update(id=${product.id})}" class="update-link">Update</a>
+                <a th:href="@{/products/delete(id=${product.id})}" class="delete-link">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

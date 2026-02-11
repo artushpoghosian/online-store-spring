@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <meta charset="UTF-8">
+  <title>Update Product</title>
+</head>
+<body>
+<a th:href="@{/products}">Back to Products</a> <br>
+<h1>Update Product</h1>
+
+<form th:action="@{/products/update}" th:object="${product}" method="post">
+  <input type="hidden" th:field="*{id}" />
+
+  Title: <input type="text" th:field="*{title}" /><br>
+  Price: <input type="number" th:field="*{price}" step="0.01" /><br>
+  Description: <textarea th:field="*{description}"></textarea><br>
+
+  <input type="submit" value="Update Product"/>
+</form>
+</body>
+</html>

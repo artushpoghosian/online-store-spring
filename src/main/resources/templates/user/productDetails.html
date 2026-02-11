@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <title th:text="${product.title}">Product</title>
+</head>
+<body>
+
+<div class="container product-details">
+  <h1 th:text="${product.title}"></h1>
+  <p><b>Price:</b> $<span th:text="${product.price}"></span></p>
+  <p><b>Description:</b> <span th:text="${product.description}"></span></p>
+  <p><b>Category:</b> <span th:text="${product.category != null ? product.category.name : 'N/A'}"></span></p>
+  <p><b>Seller:</b> <span th:text="${product.user != null ? product.user.username : 'N/A'}"></span></p>
+  <a th:href="@{/products}" class="back-link">← Back to products</a>
+</div>
+
+</body>
+</html>

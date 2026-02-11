@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container text-center">
+    <h1>Welcome to the Admin Panel</h1>
+    <div class="nav-menu">
+        <a th:href="@{/admin/users}">View Users</a>
+        <a th:href="@{/categories}">Manage Categories</a>
+        <a th:href="@{/products}">Manage Products</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+</body>
+</html>
