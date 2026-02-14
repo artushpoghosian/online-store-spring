@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <meta charset="UTF-8">
@@ -17,6 +17,7 @@
         <th>NAME</th>
         <th>SURNAME</th>
         <th>USERNAME</th>
+        <th>ACTION</th>
     </tr>
     <tr>
     <tr th:each="user : ${users}">
@@ -30,6 +31,9 @@
         <td th:text="${user.name}"></td>
         <td th:text="${user.surname}"></td>
         <td th:text="${user.username}"></td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin/users/delete(id=${user.id})}" class="delete-link">Delete</a>
+        </td>
     </tr>
 </table>
 </body>

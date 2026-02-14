@@ -14,7 +14,7 @@ public interface UserService {
 
     User save(User user, MultipartFile file);
 
-    void delete(int id);
+    void deleteById(int id);
 
     Optional<User> findByUsername(String username);
 
