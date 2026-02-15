@@ -7,8 +7,9 @@
 </head>
 <body>
 
+<th:block th:insert="~{fragments/userHeaderFragments :: userHeader}"></th:block>
+
 <div class="container">
-    <a th:href="@{/categories}" class="back-link">← Back to categories</a>
     <h1 class="text-center">Products</h1>
 
     <table>

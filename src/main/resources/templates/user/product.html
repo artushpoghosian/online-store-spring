@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<th:block th:insert="~{fragments/userHeaderFragments :: userHeader}"></th:block>
+
 <div class="container product-details">
   <h1 th:text="${product.title}"></h1>
   <p><b>Price:</b> $<span th:text="${product.price}"></span></p>

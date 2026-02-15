@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -7,17 +7,9 @@
 </head>
 <body>
 
+<th:block th:insert="~{fragments/userHeaderFragments :: userHeader}"></th:block>
+
 <div class="container">
-
-    <span sec:authorize="isAuthenticated()" style="margin-bottom: 20px;" class="message">
-        Welcome back, <span sec:authentication="name">User</span>! Explore our categories below.
-    </span>
-
-    <div class="nav-menu">
-        <a th:href="@{/categories}">All Categories</a>
-        <a th:href="@{/products}">All Products</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
-    </div>
 
     <h1>Categories</h1>
 

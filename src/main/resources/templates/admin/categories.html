@@ -5,12 +5,12 @@
     <title>Categories</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+<th:block th:insert="~{fragments/adminHeaderFragments :: adminHeader}"></th:block>
 <body>
 <div class="container">
     <h1>Categories</h1>
     <div class="nav-menu">
-        <a th:href="@{/admin/home}">Back to Admin Page</a>
-        <a th:href="@{/categories/add}">[+] Add Category</a>
+        <a th:href="@{/categories/add}">Add Category</a>
     </div>
 
     <table>

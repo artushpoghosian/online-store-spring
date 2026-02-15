@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user, MultipartFile multipartFile) {
-        if (!multipartFile.isEmpty() && multipartFile != null) {
+        if (multipartFile != null && !multipartFile.isEmpty()) {
             String fileName = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
             File file = new File(imageDirectoryPath + fileName);
             try {

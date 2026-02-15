@@ -3,41 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>Register - Online Store</title>
+    <title th:text="#{register.title} + ' - Online Store'"></title>
 </head>
 <body>
 
+<th:block th:insert="~{fragments/guestHeaderFragments :: guestHeader}"></th:block>
+
 <div class="auth-container">
-    <h1>Create Your Account</h1>
-    <p style="text-align: center; margin-bottom: 30px;">
-        Join our store today and start exploring amazing products!
+
+    <h1 th:text="#{register.title}"></h1>
+
+    <p style="text-align: center; margin-bottom: 30px;"
+       th:text="#{register.subtitle}">
     </p>
 
     <span th:if="${msg != null}" class="message" th:text="${msg}"></span>
 
     <form th:action="@{/register}" method="post" enctype="multipart/form-data">
-        <label for="name">First Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your first name" required>
 
-        <label for="surname">Last Name</label>
-        <input type="text" id="surname" name="surname" placeholder="Enter your last name" required>
+        <label for="name" th:text="#{register.firstname}"></label>
+        <input type="text"
+               id="name"
+               name="name"
+               th:placeholder="#{register.firstname.placeholder}"
+               required>
 
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Choose a username" required>
+        <label for="surname" th:text="#{register.lastname}"></label>
+        <input type="text"
+               id="surname"
+               name="surname"
+               th:placeholder="#{register.lastname.placeholder}"
+               required>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Choose a password" required>
+        <label for="username" th:text="#{register.username}"></label>
+        <input type="text"
+               id="username"
+               name="username"
+               th:placeholder="#{register.username.placeholder}"
+               required>
 
-        <label for="pic">Profile Picture</label>
-        <input type="file" id="pic" name="pic">
+        <label for="password" th:text="#{register.password}"></label>
+        <input type="password"
+               id="password"
+               name="password"
+               th:placeholder="#{register.password.placeholder}"
+               required>
 
-        <input type="submit" value="Register">
+        <label for="pic" th:text="#{register.picture}"></label>
+        <input type="file"
+               id="pic"
+               name="pic">
+
+        <input type="submit" th:value="#{register.button}">
     </form>
 
     <p style="text-align: center; margin-top: 20px;">
-        Already have an account?
-        <a th:href="@{/login}">Login here</a>
+        <span th:text="#{register.have.account}"></span>
+        <a th:href="@{/login}"
+           th:text="#{register.login.here}"></a>
     </p>
+
 </div>
 
 </body>

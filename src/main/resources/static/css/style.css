@@ -371,3 +371,37 @@ span[th-text*="msg"] {
 .p-20 {
     padding: 20px;
 }
+.lang-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.lang-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    line-height: 1;
+    height: 40px;
+    min-width: 60px;
+    background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+    color: white;
+    padding: 0 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(67, 160, 71, 0.3);
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.lang-btn:hover {
+    background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
+}
+

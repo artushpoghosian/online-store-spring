@@ -3,30 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>Login - Online Store</title>
+    <title th:text="#{login.title} + ' - Online Store'"></title>
 </head>
 <body>
 
+<th:block th:insert="~{fragments/guestHeaderFragments :: guestHeader}"></th:block>
+
 <div class="auth-container">
-    <h1>Welcome to Our Store!</h1>
-    <p style="text-align: center; margin-bottom: 30px;">
-        Please log in to access your account and explore our products.
+
+    <h1 th:text="#{login.title}"></h1>
+
+    <p style="text-align: center; margin-bottom: 30px;"
+       th:text="#{login.subtitle}">
     </p>
 
     <form th:action="@{/login}" method="post">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <label for="username" th:text="#{login.username}"></label>
 
-        <input type="submit" value="Login">
+        <input type="text"
+               id="username"
+               name="username"
+               th:placeholder="#{login.username.placeholder}"
+               required>
+
+        <label for="password" th:text="#{login.password}"></label>
+
+        <input type="password"
+               id="password"
+               name="password"
+               th:placeholder="#{login.password.placeholder}"
+               required>
+
+        <input type="submit" th:value="#{login.button}">
     </form>
 
     <p style="text-align: center; margin-top: 20px;">
-        Don't have an account?
-        <a th:href="@{/register}">Register here</a>
+        <span th:text="#{login.no.account}"></span>
+        <a th:href="@{/register}"
+           th:text="#{login.register.here}"></a>
     </p>
+
 </div>
 
 </body>

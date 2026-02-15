@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="adminHeader">
+    <div class="lang-buttons">
+        <a href="?lang=en" class="lang-btn">EN</a>
+        <a href="?lang=ru" class="lang-btn">RU</a>
+        <a href="?lang=hy" class="lang-btn">HY</a>
+    </div>
+
+    <h1 style="text-align: center; margin-bottom: 20px;">
+        <span th:text="#{adminHeader.welcome}">Welcome to the Admin Panel</span>
+    </h1>
+
+    <div class="nav-menu">
+        <a th:href="@{/admin/users}" th:text="#{adminHeader.view}">View Users</a>
+        <a th:href="@{/categories}" th:text="#{adminHeader.categories}">Manage Categories</a>
+        <a th:href="@{/products}" th:text="#{adminHeader.products}">Manage Products</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{header.logout}">Logout</a>
+    </div>
+</div>
+</body>
+</html>

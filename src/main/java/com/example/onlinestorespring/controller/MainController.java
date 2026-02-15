@@ -46,11 +46,21 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user, @RequestParam("pic") MultipartFile multipartFile) {
-        if (userService.findByUsername(user.getUsername()).isPresent()) {
+    public String register(@RequestParam("name") String name,
+                           @RequestParam("surname") String surname,
+                           @RequestParam("username") String username,
+                           @RequestParam("password") String password,
+                           @RequestParam("pic") MultipartFile multipartFile) {
+        if (userService.findByUsername(username).isPresent()) {
             return "redirect:/register?msg=Username already exists! Please choose another username!";
         }
+        User user = new User();
+        user.setName(name);
+        user.setSurname(surname);
+        user.setUsername(username);
+        user.setPassword(password);
         userService.save(user, multipartFile);
+
         return "redirect:/login?msg=Registered Successfully!";
     }
 
