@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="userHeader">
+    <div class="lang-buttons">
+        <a href="?lang=en" class="lang-btn">EN</a>
+        <a href="?lang=ru" class="lang-btn">RU</a>
+        <a href="?lang=hy" class="lang-btn">HY</a>
+    </div>
+
+    <span sec:authorize="isAuthenticated()" class="message" style="margin-bottom: 20px; display: block; text-align: center;">
+        <span th:text="#{userHeader.welcome}">Welcome back</span>
+        <span th:text="${user.getName() + ' ' + user.getSurname()}"></span>!
+    </span>
+
+    <div class="nav-menu">
+        <a th:href="@{/categories}" th:text="#{userHeader.categories}">All Categories</a>
+        <a th:href="@{/products}" th:text="#{userHeader.products}">All Products</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{header.logout}">Logout</a>
+    </div>
+</div>
+</body>
+</html>
