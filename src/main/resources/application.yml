@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: online-store-spring
+  datasource:
+    url: jdbc:mysql://localhost:3306/online_store
+    username: root
+    password: rootroot
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+online:
+  store:
+    uploaded:
+      images:
+        directory:
+          path: /Users/rt/Desktop/Java/Spring/online-store-spring/uploaded_images
