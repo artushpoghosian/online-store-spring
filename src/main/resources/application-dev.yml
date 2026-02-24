@@ -4,17 +4,18 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/online_store
     username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:rootroot}
+    password: ${DB_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
       max-file-size: 10MB
-  jpa:
-    show-sql: false
 
-online:
-  store:
-    uploaded:
-      images:
+server:
+  port: 8082
+
+student:
+  portal:
+    upload:
+      image:
         directory:
           path: /Users/rt/Desktop/Java/Spring/online-store-spring/uploaded_images

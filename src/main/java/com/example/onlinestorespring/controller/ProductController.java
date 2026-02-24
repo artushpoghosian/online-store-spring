@@ -1,12 +1,17 @@
 package com.example.onlinestorespring.controller;
 
+import com.example.onlinestorespring.dto.ProductSearchCriteria;
 import com.example.onlinestorespring.model.Category;
 import com.example.onlinestorespring.model.Product;
 import com.example.onlinestorespring.model.User;
 import com.example.onlinestorespring.service.CategoryService;
 import com.example.onlinestorespring.service.ProductService;
 import com.example.onlinestorespring.service.UserService;
+import com.example.onlinestorespring.specification.ProductSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,15 +33,50 @@ public class ProductController {
     @GetMapping("/products")
     public String products(@RequestParam(required = false) Integer categoryId,
                            ModelMap modelMap,
+                           @RequestParam("page") Optional<Integer> page,
+                           @RequestParam("size") Optional<Integer> size,
+                           @RequestParam Optional<String> sortField,
+                           @RequestParam Optional<String> sortDir,
+                           @ModelAttribute ProductSearchCriteria searchCriteria,
                            Authentication auth) {
-        List<Product> products;
-        if (categoryId != null) {
-            products = productService.findByCategoryId(categoryId);
-        } else {
-            products = productService.findAll();
-        }
 
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        String field = sortField.orElse("createdAt");
+        String direction = sortDir.orElse("desc");
+
+        Sort sort = direction.equalsIgnoreCase("asc")
+                ? Sort.by(field).ascending()
+                : Sort.by(field).descending();
+
+        PageRequest pageRequest = PageRequest.of(currentPage - 1, pageSize, sort);
+
+        Page<Product> products;
+
+        boolean noFilter =
+                (searchCriteria.getTitle() == null || searchCriteria.getTitle().isBlank())
+                        && searchCriteria.getMinPrice() == null
+                        && searchCriteria.getMaxPrice() == null;
+
+        if (noFilter) {
+            products = productService.findAll(pageRequest);
+        } else {
+            ProductSpecification productSpecification = new ProductSpecification(searchCriteria);
+            products = productService.findAllWithSpecification(productSpecification, pageRequest);
+            modelMap.addAttribute("searchCriteria", searchCriteria);
+        }
         modelMap.addAttribute("products", products);
+        modelMap.addAttribute("sortField", field);
+        modelMap.addAttribute("sortDir", direction);
+
+        int totalPages = products.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .toList();
+            modelMap.addAttribute("pageNumbers", pageNumbers);
+        }
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             return "admin/products";
         } else {

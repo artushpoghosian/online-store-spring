@@ -405,3 +405,138 @@ span[th-text*="msg"] {
     box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
 }
 
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    gap: 5px;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination li.active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    pointer-events: none;
+}
+
+@media (max-width: 480px) {
+    .pagination a {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+}
+
+.filter-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+.filter-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.filter-form input[name="title"] {
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.price-row {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-form input[name="minPrice"],
+.filter-form input[name="maxPrice"] {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-form input[type="text"]:focus,
+.filter-form input[type="number"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    outline: none;
+}
+
+.filter-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    align-self: center; /* center the button */
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.filter-form input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+    .price-row {
+        flex-direction: column;
+    }
+
+    .filter-form input[type="submit"] {
+        width: 100%;
+    }
+}
+
+.site-footer {
+    margin: 60px auto 20px auto;
+    text-align: center;
+}
+
+.site-footer span {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.7);
+    color: #0d47a1;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.15);
+    font-weight: 500;
+}

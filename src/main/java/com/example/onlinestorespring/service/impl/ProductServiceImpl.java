@@ -5,6 +5,10 @@ import com.example.onlinestorespring.model.Product;
 import com.example.onlinestorespring.repository.ProductRepository;
 import com.example.onlinestorespring.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +20,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     @Override
@@ -55,6 +59,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductsByCategory(Category category) {
         return List.of();
+    }
+
+    @Override
+    public Page<Product> findAllWithSpecification(Specification<Product> specification, Pageable pageable) {
+        return productRepository.findAll(specification, pageable);
     }
 
 

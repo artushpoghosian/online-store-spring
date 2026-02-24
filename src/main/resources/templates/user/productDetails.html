@@ -17,6 +17,6 @@
   <p><b>Seller:</b> <span th:text="${product.user != null ? product.user.username : 'N/A'}"></span></p>
   <a th:href="@{/products}" class="back-link">← Back to products</a>
 </div>
-
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
